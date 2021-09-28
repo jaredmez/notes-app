@@ -74,6 +74,10 @@ let notes = [
     }
 ];
 
+const generateId = () => {
+  return Math.floor(Math.random() *1000);
+}
+
 app.get('/', (req, res) => {
     console.log(req);
     res.send('<h1>Whats up World!?</h1>');
@@ -102,10 +106,8 @@ app.delete('/api/notes/:id', (req, res) => {
 })
 
 app.post('/api/notes', (req, res) => {
-  const note = req.body;
-  res.json(note);
-  console.log('note posted');
-
+  const newNote = {...req.body, id: generateId() }
+  res.json(newNote);
 })
 
 app.put('/api/notes/:id', (req, res) => {
