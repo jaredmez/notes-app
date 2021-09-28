@@ -79,7 +79,7 @@ const generateId = () => {
 }
 
 app.get('/', (req, res) => {
-    console.log(req);
+    
     res.send('<h1>Whats up World!?</h1>');
 })
 
@@ -107,6 +107,7 @@ app.delete('/api/notes/:id', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
   const newNote = {...req.body, id: generateId() }
+  notes = notes.concat(newNote);
   res.json(newNote);
 })
 
