@@ -1,5 +1,4 @@
 const express = require('express');
-const { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } = require('react-dom');
 const app = express();
 const cors = require('cors');
 
@@ -120,5 +119,5 @@ app.put('/api/notes/:id', (req, res) => {
   res.send(req.body);
 })
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, ()=> console.log('Server running on port: 3001'));
