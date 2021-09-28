@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
+app.use(express.static('build'));
 app.use(cors());
 app.use(express.json());
 
 let notes = [
     {
       "id": 1,
-      "content": "HTML is easy",
+      "content": "HTML & CSS can be tricky",
       "date": "2019-05-30T17:30:31.098Z",
       "important": true
     },
@@ -26,52 +27,11 @@ let notes = [
     },
     {
       "id": 4,
-      "content": "testing",
+      "content": "Hello, from LA",
       "date": "2021-09-25T22:03:18.813Z",
       "important": false
     },
-    {
-      "id": 5,
-      "content": "yay! post method is sendin data to \"database\"",
-      "date": "2021-09-25T22:03:48.134Z",
-      "important": false
-    },
-    {
-      "id": 6,
-      "content": "Tems & Brent song !!!",
-      "date": "2021-09-25T22:08:45.780Z",
-      "important": false
-    },
-    {
-      "id": 7,
-      "content": "Masego",
-      "date": "2021-09-25T22:13:53.506Z",
-      "important": false
-    },
-    {
-      "content": "no id added on client-side",
-      "date": "2021-09-25T22:22:59.614Z",
-      "important": false,
-      "id": 8
-    },
-    {
-      "content": "TEMS pt 2",
-      "date": "2021-09-25T22:54:44.919Z",
-      "important": false,
-      "id": 9
-    },
-    {
-      "content": "Music is life",
-      "date": "2021-09-25T22:55:09.278Z",
-      "important": false,
-      "id": 10
-    },
-    {
-      "content": "GT 45 UNC 22",
-      "date": "2021-09-26T18:24:32.663Z",
-      "important": true,
-      "id": 11
-    }
+
 ];
 
 const generateId = () => {
