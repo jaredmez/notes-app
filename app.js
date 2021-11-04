@@ -9,8 +9,6 @@ const mongoose = require('mongoose')
 
 logger.info('connecting to', config.MONGODB_URI)
 
-//pass: db1intr0
-
 
 mongoose.connect(config.MONGODB_URI)
   .then(() => {
