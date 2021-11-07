@@ -35,10 +35,6 @@ notesRouter.delete('/:id', async (req, res, next) => {
 notesRouter.post('/', async (req, res, next) => {
   const body = req.body
 
-  if(body === undefined) {
-    return res.status(400).json({error: 'content missing'})
-  }
-
   const note = new Note({
     content: body.content,
     important: body.important || false,
