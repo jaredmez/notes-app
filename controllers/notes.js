@@ -1,10 +1,10 @@
 const notesRouter = require('express').Router()
-const { update } = require('../models/note')
 const Note = require('../models/note')
+const User = require('../models/user')
 
 
 notesRouter.get('/', async (req, res) => {
-  const notes = await Note.find()
+  const notes = await Note.find().populate('user', {username: 1, name: 1})
   res.json(notes)
 })
 
@@ -34,16 +34,39 @@ notesRouter.delete('/:id', async (req, res, next) => {
 
 notesRouter.post('/', async (req, res, next) => {
   const body = req.body
+  console.log(body)
+
+  const user = await User.findById(body.userId)
+  console.log('user is')
+  console.log(user);
 
   const note = new Note({
     content: body.content,
     important: body.important || false,
     date: new Date(),
+    user: user._id
   })
 
   try {
     const savedNote = await note.save()
+    console.log(savedNote._id)
+    // user.notes = user.notes.concat(savedNote._id)
+    // console.log(user.notes)
+    // await user.save()
+
+    const newNotesArr = user.notes.concat(savedNote._id)
+    console.log(newNotesArr)
+
+    User.findOneAndUpdate({_id: user._id}, {notes: newNotesArr}, (err, doc) => {
+      if( err) {
+      console.log(err)}
+      else {
+        console.log(doc)
+      }
+    });
+
     res.json(savedNote)
+
   } catch(exception) {
     next(exception);
   }
